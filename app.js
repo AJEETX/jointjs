@@ -48,11 +48,11 @@ var stencilGraph = new joint.dia.Graph,
                         fill: {
                           type: 'linearGradient',
                           stops: [{
-                            offset: '0%',
+                            offset: '5%',
                             color: 'white'
                           }, {
                             offset: '50%',
-                            color: 'black'
+                            color: '#3498DB'
                           }],
                           attrs: {
                             x1: '0%',
@@ -78,11 +78,11 @@ var stencilGraph = new joint.dia.Graph,
             fill: {
               type: 'linearGradient',
               stops: [{
-                offset: '0%',
+                offset: '5%',
                 color: 'white'
               }, {
                 offset: '50%',
-                color: '#d1d1d1'
+                color: 'gold'
               }],
               attrs: {
                 x1: '0%',
@@ -110,11 +110,11 @@ var step = new joint.shapes.devs.Model({
                         fill: {
                           type: 'linearGradient',
                           stops: [{
-                            offset: '0%',
+                            offset: '5%',
                             color: 'white'
                           }, {
                             offset: '50%',
-                            color: 'black'
+                            color: 'gold'
                           }],
                           attrs: {
                             x1: '0%',
@@ -141,11 +141,11 @@ var step = new joint.shapes.devs.Model({
                         fill: {
                           type: 'linearGradient',
                           stops: [{
-                            offset: '0%',
+                            offset: '5%',
                             color: 'white'
                           }, {
                             offset: '50%',
-                            color: 'black'
+                            color: 'gold'
                           }],
                           attrs: {
                             x1: '0%',
@@ -170,11 +170,11 @@ var step = new joint.shapes.devs.Model({
           fill: {
             type: 'linearGradient',
             stops: [{
-              offset: '0%',
+              offset: '5%',
               color: 'white'
             }, {
               offset: '50%',
-              color: '#d1d1d1'
+              color: '#3498DB'
             }],
             attrs: {
               x1: '0%',
@@ -188,7 +188,7 @@ var step = new joint.shapes.devs.Model({
           stroke: 'gray'
         },
         '.label': {
-          text: ' WORKFLOW',
+          text: ' workflow step',
           'ref-y': 10,
           stroke:'#000'
         },
@@ -219,11 +219,11 @@ var complete = new joint.shapes.devs.Model({
                         fill: {
                           type: 'linearGradient',
                           stops: [{
-                            offset: '0%',
+                            offset: '5%',
                             color: 'white'
                           }, {
                             offset: '50%',
-                            color: 'black'
+                            color: '#3498DB'
                           }],
                           attrs: {
                             x1: '0%',
@@ -250,11 +250,11 @@ var complete = new joint.shapes.devs.Model({
             fill: {
               type: 'linearGradient',
               stops: [{
-                offset: '0%',
+                offset: '5%',
                 color: 'white'
               }, {
                 offset: '50%',
-                color: '#d1d1d1'
+                color: 'gold'
               }],
               attrs: {
                 x1: '0%',
