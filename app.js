@@ -19,6 +19,13 @@ var graph = new joint.dia.Graph,
         // Enable link snapping within 50px lookup radius
         snapLinks: { radius: 50 },
         gridSize: 20,
+        elementView: joint.dia.ElementView.extend({
+          pointerdblclick: function(evt, x, y) {
+              joint.dia.CellView.prototype.pointerdblclick.apply(this, arguments);
+              this.notify('element:pointerdblclick', evt, x, y);
+              this.model.remove();
+          }
+      })
         // drawGrid: true
   });
 
@@ -335,18 +342,18 @@ paper.on('cell:pointerclick', function(cellView, evt, x, y) {
     console.log('pointerclick ' + cellView.model.prop('type'))
     $('#blockname').val( cellView.model.attributes.name)
   });
-paper.on('cell:pointerup', function(cellView, e, x, y) {
+// paper.on('cell:pointerup', function(cellView, e, x, y) {
       
-  $('#blockname').val(cellView.model.attributes.name + ' pointerup '+ cellView.model.prop('type') )
-  });
+//   $('#blockname').val(cellView.model.attributes.name + ' pointerup '+ cellView.model.prop('type') )
+//   });
 
-paper.on('cell:pointerdown', function(cellView, e, x, y) {
+// paper.on('cell:pointerdown', function(cellView, e, x, y) {
       
-  $('#blockname').val(cellView.model.attributes.name +' pointerdown '+ cellView.model.prop('type'))
-  });
-  graph.on('change:position', function(element, position) {
-    $('#blockname').val('Element ' + element.id + ' moved to ' + position.x + ',' + position.y);
-  });
+//   $('#blockname').val(cellView.model.attributes.name +' pointerdown '+ cellView.model.prop('type'))
+//   });
+  // graph.on('change:position', function(element, position) {
+  //   $('#blockname').val('Element ' + element.id + ' moved to ' + position.x + ',' + position.y);
+  // });
   // Binding handler to the event
 paper.on('element:delete', function(elementView, evt) {
   // Stop any further actions with the element view e.g. dragging
@@ -356,18 +363,18 @@ paper.on('element:delete', function(elementView, evt) {
   }
 });
 
-paper.on('element:mouseenter',function(elementView){
+// paper.on('element:mouseenter',function(elementView){
 
-  $('#blockname').val(elementView.model.attributes.name);
-})
+//   $('#blockname').val(elementView.model.attributes.name);
+// })
 
-paper.on('link:mouseenter', function(linkView) {
-  $('#blockname').val(linkView.showTools());
-});
+// paper.on('link:mouseenter', function(linkView) {
+//   $('#blockname').val(linkView.showTools());
+// });
 
-paper.on('link:mouseleave', function(linkView) {
-  $('#blockname').val(linkView.hideTools());
-});
+// paper.on('link:mouseleave', function(linkView) {
+//   $('#blockname').val(linkView.hideTools());
+// });
 
 
 paper.on('blank:pointerdblclick', function() {
@@ -403,11 +410,22 @@ paper.on('link:pointerdblclick', function(linkView) {
 
 paper.on('cell:pointerdblclick', function(cellView) {
   var isElement = cellView.model.isElement();
-  var message = (isElement ? 'Element' : 'Link') + ' clicked';
-  // init.attr('label/text', message);
+  if(!isElement){
+    var elements=graph.getElements();
+    var source='';
+    var target='';
+    $.each(elements,function(index,element){
+      //find the source name
+      if(cellView.model.attributes.source.id===element.id)
+        source=element.attributes.name;
 
-  // init.attr('body/visibility', 'visible');
-  // init.attr('label/visibility', 'visible');
+      //find the target name
+      if(cellView.model.attributes.target.id===element.id)
+        target=element.attributes.name;        
+    })
+}
+  var message = (isElement ? " {" + cellView.model.attributes.name +'} Element' : 'Link between {'+source +'} and {'+target  ) + '} clicked';
+  alert( message)
 });
 
 function resetAll(paper) {
@@ -437,7 +455,7 @@ function resetAll(paper) {
 graph.on('change:position', function(cell) {
   var center = cell.getBBox().center();
   var label = center.toString();
-  cell.attr('label/text', label);
+  cell.attr('.label/text', label);
 });
 
 graph.on('change:target', function(cell) {
@@ -451,3 +469,12 @@ graph.on('change:target', function(cell) {
       }
   });
 });
+function Reset(){
+  alert('hi')
+}
+function GetJson(){
+  var jsonString = JSON.stringify(graph)
+}
+// paper.on('cell:highlight', function(cell){
+//   alert(cell)
+// })
